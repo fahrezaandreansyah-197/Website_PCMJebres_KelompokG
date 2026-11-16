@@ -1,0 +1,95 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Agenda - PCM Jebres{% endblock %}
+
+{% block content %}
+<div class="container py-5 agenda-page">
+
+    <div class="text-center mb-5">
+        <h2 class="fw-bold">Agenda Kegiatan</h2>
+        <p class="text-muted">
+            Informasi kegiatan Pimpinan Cabang Muhammadiyah Jebres.
+        </p>
+    </div>
+
+    <!-- Agenda Mendatang -->
+    <section class="mb-5">
+        <h4 class="fw-bold mb-3">Agenda Mendatang</h4>
+
+        {% for agenda in agenda_mendatang %}
+        <div class="card shadow-sm mb-3">
+            <div class="card-body">
+                <h5 class="fw-bold">{{ agenda.nama_kegiatan }}</h5>
+                <p class="mb-1">
+                    <strong>Waktu:</strong>
+                    {{ agenda.waktu_mulai|date:"l, d F Y H:i" }} WIB
+                </p>
+                <p class="mb-1">
+                    <strong>Tempat:</strong> {{ agenda.tempat }}
+                </p>
+                <p class="text-muted mb-0">
+                    {{ agenda.keterangan }}
+                </p>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-muted">Belum ada agenda mendatang.</p>
+        {% endfor %}
+    </section>
+
+    <!-- Agenda Rutin -->
+    <section class="mb-5">
+        <h4 class="fw-bold mb-3">Kegiatan Rutin</h4>
+
+        {% for agenda in agenda_rutin %}
+        <div class="card shadow-sm mb-3">
+            <div class="card-body">
+                <h5 class="fw-bold">{{ agenda.nama_kegiatan }}</h5>
+                <p class="mb-1">
+                    <strong>Jadwal:</strong>
+                    {% if agenda.jadwal_rutin %}
+                        {{ agenda.jadwal_rutin }}
+                    {% else %}
+                        Jadwal belum ditentukan
+                    {% endif %}
+                </p>
+                <p class="mb-1">
+                    <strong>Tempat:</strong> {{ agenda.tempat }}
+                </p>
+                <p class="text-muted mb-0">
+                    {{ agenda.keterangan }}
+                </p>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-muted">Belum ada informasi kegiatan rutin.</p>
+        {% endfor %}
+    </section>
+
+    <!-- Agenda Lampau -->
+    <section>
+        <h4 class="fw-bold mb-3">Agenda yang Telah Berlalu</h4>
+
+        {% for agenda in agenda_lampau %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5>{{ agenda.nama_kegiatan }}</h5>
+                <p class="mb-1">
+                    <strong>Waktu:</strong>
+                    {{ agenda.waktu_mulai|date:"d F Y H:i" }} WIB
+                </p>
+                <p class="mb-1">
+                    <strong>Tempat:</strong> {{ agenda.tempat }}
+                </p>
+                <p class="text-muted mb-0">
+                    {{ agenda.keterangan }}
+                </p>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-muted">Belum ada agenda yang telah berlalu.</p>
+        {% endfor %}
+    </section>
+
+</div>
+{% endblock %}

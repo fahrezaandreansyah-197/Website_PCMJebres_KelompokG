@@ -1,0 +1,244 @@
+
+{% extends 'core/base.html' %}
+
+{% block title %}Beranda | PCM Jebres{% endblock %}
+
+{% block content %}
+
+<!-- HERO SECTION -->
+<section class="hero-section mb-5">
+    <div class="hero-content">
+        <span class="hero-badge">
+            Pimpinan Cabang Muhammadiyah
+        </span>
+
+        <h1>
+            Selamat Datang di<br>
+            <span>PCM Jebres</span>
+        </h1>
+
+        {% if profil_global and profil_global.tagline %}
+            <p class="hero-tagline">
+                {{ profil_global.tagline }}
+            </p>
+        {% endif %}
+
+        <p class="hero-description">
+            Mengenal lebih dekat profil organisasi, pimpinan,
+            amal usaha, serta kegiatan Muhammadiyah di wilayah Jebres.
+        </p>
+
+        <div class="hero-actions">
+            <a href="{% url 'core:profil' %}" class="btn btn-hero">
+                Kenali Kami
+            </a>
+
+            <a href="{% url 'publikasi:daftar_berita' %}"
+               class="btn btn-hero-outline">
+                Lihat Berita
+            </a>
+        </div>
+    </div>
+
+    <div class="hero-decoration">
+        <div class="hero-circle hero-circle-one"></div>
+        <div class="hero-circle hero-circle-two"></div>
+        <div class="hero-circle hero-circle-three"></div>
+    </div>
+</section>
+
+
+<!-- STATISTIK ORGANISASI -->
+<section class="home-section mb-5">
+
+    <div class="section-heading">
+        <span class="section-label">Informasi Organisasi</span>
+        <h2>PCM Jebres dalam Angka</h2>
+        <p>Gambaran informasi organisasi berdasarkan data yang tersedia.</p>
+    </div>
+
+    <div class="row g-4">
+
+        <div class="col-md-4">
+            <div class="stat-card h-100">
+                <div class="stat-icon">
+                    <i class="bi bi-diagram-3"></i>
+                </div>
+
+                <h3>{{ jumlah_ranting }}</h3>
+                <p>Ranting Muhammadiyah</p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="stat-card h-100">
+                <div class="stat-icon">
+                    <i class="bi bi-building"></i>
+                </div>
+
+                <h3>{{ jumlah_amal_usaha }}</h3>
+                <p>Amal Usaha</p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="stat-card h-100">
+                <div class="stat-icon">
+                    <i class="bi bi-building"></i>
+                </div>
+
+                <h3>33</h3>
+                <p>Masjid</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- BERITA TERBARU -->
+<section class="home-section mb-5">
+
+    <div class="section-heading section-heading-left">
+        <div>
+            <span class="section-label">Kabar dan Informasi</span>
+            <h2>Berita Terbaru</h2>
+            <p>Informasi dan perkembangan kegiatan PCM Jebres.</p>
+        </div>
+
+        <a href="{% url 'publikasi:daftar_berita' %}"
+           class="section-link">
+            Lihat Semua
+            <i class="bi bi-arrow-right"></i>
+        </a>
+    </div>
+
+    <div class="row g-4">
+
+        {% for berita in berita_terbaru %}
+            <div class="col-md-6 col-lg-4">
+                <article class="content-card h-100">
+
+                    {% if berita.gambar_sampul %}
+                        <div class="content-card-image">
+                            <img src="{{ berita.gambar_sampul.url }}"
+                                 alt="{{ berita.judul }}"
+                                 loading="lazy">
+                        </div>
+                    {% else %}
+                        <div class="content-card-placeholder">
+                            <i class="bi bi-newspaper"></i>
+                        </div>
+                    {% endif %}
+
+                    <div class="content-card-body">
+
+                        <span class="content-date">
+                            <i class="bi bi-calendar3"></i>
+                            {{ berita.tanggal_terbit|date:"d M Y" }}
+                        </span>
+
+                        <h3>{{ berita.judul }}</h3>
+
+                        <p>
+                            {{ berita.ringkasan|truncatewords:20 }}
+                        </p>
+
+                        <a href="{% url 'publikasi:detail_berita' berita.slug %}"
+                           class="content-link">
+                            Baca Selengkapnya
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+
+                    </div>
+                </article>
+            </div>
+
+        {% empty %}
+            <div class="col-12">
+                <div class="empty-state">
+                    <i class="bi bi-newspaper"></i>
+                    <h3>Belum Ada Berita</h3>
+                    <p>Berita terbaru PCM Jebres akan ditampilkan di sini.</p>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+</section>
+
+
+<!-- AGENDA MENDATANG -->
+<section class="home-section mb-5">
+
+    <div class="section-heading section-heading-left">
+        <div>
+            <span class="section-label">Kegiatan Organisasi</span>
+            <h2>Agenda Mendatang</h2>
+            <p>Informasi kegiatan dan agenda PCM Jebres.</p>
+        </div>
+
+        <a href="{% url 'publikasi:daftar_agenda' %}"
+           class="section-link">
+            Lihat Semua
+            <i class="bi bi-arrow-right"></i>
+        </a>
+    </div>
+
+    <div class="row g-4">
+
+        {% for agenda in agenda_mendatang %}
+            <div class="col-md-6 col-lg-4">
+                <article class="agenda-card h-100">
+
+                    <div class="agenda-icon">
+                        <i class="bi bi-calendar-event"></i>
+                    </div>
+
+                    <div class="agenda-content">
+
+                        <span class="agenda-label">
+                            Agenda Kegiatan
+                        </span>
+
+                        <h3>{{ agenda.nama_kegiatan }}</h3>
+
+                        <div class="agenda-information">
+                            <p>
+                                <i class="bi bi-clock"></i>
+                                <strong>Jadwal:</strong>
+
+                                {% if agenda.jadwal_rutin %}
+                                    {{ agenda.jadwal_rutin }}
+                                {% elif agenda.waktu_mulai %}
+                                    {{ agenda.waktu_mulai|date:"d M Y, H:i" }} WIB
+                                {% else %}
+                                    Jadwal belum ditentukan
+                                {% endif %}
+                            </p>
+
+                            <p>
+                                <i class="bi bi-geo-alt"></i>
+                                <strong>Tempat:</strong>
+                                {{ agenda.tempat|default:"Belum ditentukan" }}
+                            </p>
+                        </div>
+
+                    </div>
+                </article>
+            </div>
+
+        {% empty %}
+            <div class="col-12">
+                <div class="empty-state">
+                    <i class="bi bi-calendar-event"></i>
+                    <h3>Belum Ada Agenda</h3>
+                    <p>Informasi agenda kegiatan akan ditampilkan di sini.</p>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="container py-5 amal-usaha-page">
+
+    <div class="text-center mb-5">
+        <h1 class="fw-bold">Amal Usaha Muhammadiyah</h1>
+        <p class="text-muted">
+            Amal usaha Muhammadiyah di lingkungan PCM Jebres.
+        </p>
+    </div>
+
+    {% regroup daftar_amal by get_bidang_display as kelompok_amal %}
+
+    {% for kelompok in kelompok_amal %}
+        <section class="mb-5">
+            <h3 class="fw-bold mb-3 amal-category-title">
+                {{ kelompok.grouper }}
+            </h3>
+
+            <div class="row g-4">
+                {% for item in kelompok.list %}
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 shadow-sm border-0 amal-card">
+
+                            {% if item.gambar %}
+                                <img src="{{ item.gambar.url }}"
+                                     class="card-img-top"
+                                     alt="{{ item.nama }}"
+                                     style="height: 200px; object-fit: cover;">
+                            {% endif %}
+
+                            <div class="card-body">
+                                <h5 class="fw-bold">{{ item.nama }}</h5>
+                                <p>{{ item.deskripsi|linebreaks }}</p>
+
+                                {% if item.alamat %}
+                                    <small class="text-muted">
+                                        {{ item.alamat }}
+                                    </small>
+                                {% endif %}
+                            </div>
+
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    {% empty %}
+        <div class="alert alert-info text-center">
+            Data amal usaha belum tersedia.
+        </div>
+    {% endfor %}
+
+</div>
+{% endblock %}

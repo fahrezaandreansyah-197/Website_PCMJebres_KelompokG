@@ -1,0 +1,136 @@
+
+{% extends 'core/base.html' %}
+
+{% block title %}Pimpinan | PCM Jebres{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="text-center mb-5">
+        <span class="section-label">Struktur Organisasi</span>
+        <h1 class="fw-bold mt-3" style="color: var(--primary);">
+            Pimpinan PCM Jebres
+        </h1>
+        <p class="text-muted">Periode 2022–2027</p>
+    </div>
+
+    {% if daftar_pimpinan %}
+        {% with daftar_pimpinan as pimpinan %}
+        <div class="organization-chart">
+
+            <!-- Ketua -->
+            <div class="org-level">
+                {% for orang in pimpinan %}
+                    {% if orang.jabatan == "Ketua" %}
+                        <div class="org-person org-chairman">
+                            {% if orang.foto %}
+                                <img src="{{ orang.foto.url }}" alt="{{ orang.nama }}">
+                            {% endif %}
+                            <h3>{{ orang.nama }}</h3>
+                            <span>{{ orang.jabatan }}</span>
+                            <small>{{ orang.periode }}</small>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+            <div class="org-connector"></div>
+
+            <!-- Wakil Ketua -->
+            <div class="org-level">
+                {% for orang in pimpinan %}
+                    {% if orang.jabatan == "Wakil Ketua" %}
+                        <div class="org-person org-vice">
+                            {% if orang.foto %}
+                                <img src="{{ orang.foto.url }}" alt="{{ orang.nama }}">
+                            {% endif %}
+                            <h3>{{ orang.nama }}</h3>
+                            <span>{{ orang.jabatan }}</span>
+                            <small>{{ orang.periode }}</small>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+            <div class="org-connector"></div>
+
+            <!-- Sekretaris dan Bendahara -->
+            <div class="org-branches">
+
+                <div class="org-branch">
+                    {% for orang in pimpinan %}
+                        {% if orang.jabatan == "Sekretaris 1" or orang.jabatan == "Sekretaris 2" %}
+                            <div class="org-person">
+                                {% if orang.foto %}
+                                    <img src="{{ orang.foto.url }}" alt="{{ orang.nama }}">
+                                {% endif %}
+                                <h3>{{ orang.nama }}</h3>
+                                <span>{{ orang.jabatan }}</span>
+                                <small>{{ orang.periode }}</small>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+                <div class="org-branch">
+                    {% for orang in pimpinan %}
+                        {% if orang.jabatan == "Bendahara 1" or orang.jabatan == "Bendahara 2" %}
+                            <div class="org-person">
+                                {% if orang.foto %}
+                                    <img src="{{ orang.foto.url }}" alt="{{ orang.nama }}">
+                                {% endif %}
+                                <h3>{{ orang.nama }}</h3>
+                                <span>{{ orang.jabatan }}</span>
+                                <small>{{ orang.periode }}</small>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+            </div>
+        </div>
+        {% endwith %}
+
+    {% else %}
+        <p class="text-center text-muted">
+            Data pimpinan belum tersedia.
+        </p>
+    {% endif %}
+        <!-- Pimpinan Majelis dan Lembaga -->
+    {% if daftar_majelis %}
+        <section class="mt-5 pt-5">
+            <div class="text-center mb-4">
+                <span class="section-label">Unsur Pembantu Pimpinan</span>
+                <h2 class="fw-bold mt-3" style="color: var(--primary);">
+                    Pimpinan Majelis dan Lembaga PCM Jebres
+                </h2>
+                <p class="text-muted">
+                    Periode 2022–2027
+                </p>
+            </div>
+
+            <div class="row g-4">
+                {% for item in daftar_majelis %}
+                    <div class="col-md-6 col-lg-4">
+                        <div class="stat-card h-100 text-center">
+                            <div class="stat-icon mx-auto">
+                                <i class="bi bi-people"></i>
+                            </div>
+
+                            <h5 class="fw-bold mt-3" style="color: var(--primary);">
+                                {{ item.nama_jabatan }}
+                            </h5>
+
+                            <p class="mb-0" style="color: var(--secondary);">
+                                {{ item.nama_ketua }}
+                            </p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    {% endif %}
+</div>
+
+{% endblock %}

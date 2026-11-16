@@ -1,0 +1,88 @@
+
+{% extends 'core/base.html' %}
+
+{% block title %}Profil Organisasi | PCM Jebres{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    {% if profil %}
+
+        <!-- Header Profil -->
+        <div class="profile-header text-center mb-5">
+            <span class="section-label">Mengenal Organisasi</span>
+            <h1 class="fw-bold mt-3">{{ profil.nama }}</h1>
+
+            {% if profil.tagline %}
+                <p class="text-muted mt-3">{{ profil.tagline }}</p>
+            {% endif %}
+        </div>
+
+        <!-- Gambar Utama -->
+        {% if profil.gambar_utama %}
+            <div class="profile-image-wrapper mb-5">
+                <img src="{{ profil.gambar_utama.url }}"
+                     alt="Foto {{ profil.nama }}"
+                     class="profile-main-image">
+            </div>
+        {% endif %}
+
+        <!-- Tentang Organisasi -->
+        {% if profil.tentang %}
+            <section class="profile-content-section mb-5">
+                <h2>Tentang Organisasi</h2>
+                <div>{{ profil.tentang|linebreaks }}</div>
+            </section>
+        {% endif %}
+
+        <!-- Sejarah -->
+        {% if profil.sejarah %}
+            <section class="profile-content-section mb-5">
+                <h2>Sejarah</h2>
+                <div>{{ profil.sejarah|linebreaks }}</div>
+            </section>
+        {% endif %}
+
+        <!-- Visi dan Misi -->
+        <section class="mb-5">
+            <div class="row g-4">
+
+                {% if profil.visi %}
+                    <div class="col-md-6">
+                        <div class="profile-value">
+                            <h2><i class="bi bi-eye"></i> Visi</h2>
+                            <div>{{ profil.visi|linebreaks }}</div>
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% if profil.misi %}
+                    <div class="col-md-6">
+                        <div class="profile-value">
+                            <h2><i class="bi bi-bullseye"></i> Misi</h2>
+                            <div>{{ profil.misi|linebreaks }}</div>
+                        </div>
+                    </div>
+                {% endif %}
+
+            </div>
+        </section>
+
+        <!-- Alamat -->
+        {% if profil.alamat %}
+            <section class="profile-content-section profile-address">
+                <h2><i class="bi bi-geo-alt"></i> Alamat Sekretariat</h2>
+                <div>{{ profil.alamat|linebreaks }}</div>
+            </section>
+        {% endif %}
+
+    {% else %}
+        <div class="alert alert-info">
+            Data profil organisasi belum tersedia.
+        </div>
+    {% endif %}
+
+</div>
+
+{% endblock %}

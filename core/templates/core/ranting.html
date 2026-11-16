@@ -1,0 +1,67 @@
+
+{% extends 'core/base.html' %}
+
+{% block title %}Ranting Muhammadiyah | PCM Jebres{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <!-- Header -->
+    <div class="text-center mb-5">
+        <span class="section-label">Wilayah Organisasi</span>
+        <h1 class="fw-bold mt-3" style="color: var(--primary);">
+            Ranting Muhammadiyah
+        </h1>
+        <p class="text-muted">
+            Daftar ranting Muhammadiyah di wilayah Kecamatan Jebres.
+        </p>
+    </div>
+
+    <!-- Daftar Ranting -->
+    <div class="row g-4">
+
+        {% for item in daftar_ranting %}
+            <div class="col-md-6 col-lg-4">
+
+                <div class="stat-card ranting-card h-100">
+
+                    <div class="stat-icon">
+                        <i class="bi bi-diagram-3"></i>
+                    </div>
+
+                    <h3 class="ranting-name">
+                        {{ item.nama_ranting }}
+                    </h3>
+
+                    {% if item.ketua %}
+                        <p class="ranting-info">
+                            <i class="bi bi-person-fill"></i>
+                            {{ item.ketua }}
+                        </p>
+                    {% endif %}
+
+                    {% if item.alamat %}
+                        <p class="ranting-info">
+                            <i class="bi bi-geo-alt-fill"></i>
+                            {{ item.alamat }}
+                        </p>
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        {% empty %}
+            <div class="col-12">
+                <p class="text-center text-muted">
+                    Data ranting belum tersedia.
+                </p>
+            </div>
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

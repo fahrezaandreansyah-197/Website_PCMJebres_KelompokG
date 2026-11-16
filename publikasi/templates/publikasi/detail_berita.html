@@ -1,0 +1,34 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+        <div class="col-lg-9">
+
+            <a href="{% url 'publikasi:daftar_berita' %}"
+               class="text-success text-decoration-none">
+                &larr; Kembali ke daftar berita
+            </a>
+
+            <h1 class="fw-bold mt-4">{{ berita.judul }}</h1>
+
+            <p class="text-muted">
+                {{ berita.tanggal_terbit|date:"d F Y, H:i" }}
+            </p>
+
+            {% if berita.gambar_sampul %}
+                <img src="{{ berita.gambar_sampul.url }}"
+                     alt="{{ berita.judul }}"
+                     class="img-fluid rounded shadow-sm mb-4 w-100">
+            {% endif %}
+
+            <div class="fs-5">
+                {{ berita.isi|linebreaks }}
+            </div>
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}

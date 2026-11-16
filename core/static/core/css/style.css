@@ -1,0 +1,1368 @@
+
+/* =========================================
+   1. COLOR PALETTE & GLOBAL SETTINGS
+========================================= */
+
+:root {
+    --primary: #203879;
+    --secondary: #086C70;
+    --green: #079653;
+    --gold: #F0BD38;
+    --background: #F3F4F6;
+    --white: #FFFFFF;
+    --text: #252B36;
+    --muted: #6B7280;
+
+    --gradient: linear-gradient(
+        110deg,
+        var(--primary),
+        var(--secondary),
+        var(--green)
+    );
+
+    --shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    --shadow-hover: 0 12px 28px rgba(0, 0, 0, 0.15);
+
+    --transition: all 0.3s ease;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: var(--background);
+    color: var(--text);
+    line-height: 1.7;
+    margin: 0;
+}
+
+
+/* =========================================
+   2. NAVBAR
+========================================= */
+
+.navbar.bg-success {
+    background: var(--gradient) !important;
+    padding: 14px 0;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.12);
+}
+
+.navbar-brand {
+    color: var(--white) !important;
+    font-size: 1.25rem;
+    font-weight: 700;
+    transition: var(--transition);
+}
+
+.navbar-brand:hover {
+    opacity: 0.85;
+}
+
+.navbar-brand img {
+    transition: var(--transition);
+}
+
+.navbar-brand:hover img {
+    transform: scale(1.08);
+}
+
+.navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-weight: 500;
+    position: relative;
+    margin: 0 5px;
+    transition: var(--transition);
+}
+
+.navbar-nav .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 2px;
+    width: 0;
+    height: 2px;
+    background: var(--gold);
+    transition: var(--transition);
+    transform: translateX(-50%);
+}
+
+.navbar-nav .nav-link:hover {
+    color: var(--white) !important;
+}
+
+.navbar-nav .nav-link:hover::after {
+    width: 75%;
+}
+
+.navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.navbar-toggler:focus {
+    box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.2);
+}
+
+
+/* =========================================
+   3. MAIN CONTENT
+========================================= */
+
+.main-content {
+    min-height: 70vh;
+    padding-top: 40px !important;
+    padding-bottom: 50px !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.section-title::after {
+    content: "";
+    display: block;
+    width: 65px;
+    height: 4px;
+    background: var(--gold);
+    border-radius: 10px;
+    margin: 12px auto 0;
+}
+
+
+/* =========================================
+   4. CARDS
+========================================= */
+
+.card {
+    border: none;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.card:hover {
+    transform: translateY(-7px);
+    box-shadow: var(--shadow-hover);
+}
+
+.card-img-top {
+    width: 100%;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 22px;
+}
+
+.card-title {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+
+/* =========================================
+   5. BUTTONS
+========================================= */
+
+.btn {
+    border-radius: 8px;
+    padding: 9px 20px;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.btn-success {
+    background: var(--gradient);
+    border: none;
+}
+
+.btn-success:hover {
+    background: linear-gradient(
+        110deg,
+        var(--green),
+        var(--secondary),
+        var(--primary)
+    );
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.btn-primary:hover {
+    background-color: var(--secondary);
+    border-color: var(--secondary);
+    transform: translateY(-2px);
+}
+
+
+/* =========================================
+   6. FORMS
+========================================= */
+
+.form-control,
+.form-select {
+    border: 1px solid #D1D5DB;
+    border-radius: 9px;
+    padding: 11px 14px;
+    transition: var(--transition);
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--secondary);
+    box-shadow: 0 0 0 0.2rem rgba(8, 108, 112, 0.12);
+}
+
+
+/* =========================================
+   7. FOOTER
+========================================= */
+
+footer.bg-dark {
+    background: var(--gradient) !important;
+    border-top: 5px solid var(--gold);
+    margin-top: 40px;
+}
+
+footer h5 {
+    color: var(--white);
+    font-weight: 700;
+}
+
+footer p,
+footer li {
+    line-height: 1.8;
+}
+
+footer a {
+    transition: var(--transition);
+}
+
+footer a:hover {
+    color: var(--gold) !important;
+    padding-left: 5px;
+}
+
+footer hr {
+    opacity: 0.3;
+}
+
+
+/* =========================================
+   8. IMAGES
+========================================= */
+
+img {
+    max-width: 100%;
+}
+
+img:not(.navbar-brand img) {
+    height: auto;
+}
+
+
+/* =========================================
+   9. RESPONSIVE DESIGN
+========================================= */
+
+@media (max-width: 991px) {
+    .navbar-nav {
+        padding-top: 15px;
+    }
+
+    .navbar-nav .nav-link {
+        padding: 9px 0;
+    }
+
+    .navbar-nav .nav-link::after {
+        display: none;
+    }
+}
+
+@media (max-width: 576px) {
+    .main-content {
+        padding-top: 25px !important;
+        padding-bottom: 30px !important;
+    }
+
+    .card-body {
+        padding: 17px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    footer {
+        text-align: center;
+    }
+}
+
+
+/* =========================================
+   10. ACCESSIBILITY
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+}
+
+/* =========================================
+   11. HOMEPAGE - HERO SECTION
+========================================= */
+
+.hero-section {
+    position: relative;
+    overflow: hidden;
+    padding: 75px 65px;
+    min-height: 390px;
+    border-radius: 24px;
+    background: linear-gradient(
+        115deg,
+        #203879 0%,
+        #086C70 65%,
+        #079653 100%
+    );
+    box-shadow: 0 15px 35px rgba(32, 56, 121, 0.18);
+    display: flex;
+    align-items: center;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 680px;
+    animation: heroFadeIn 0.8s ease;
+}
+
+.hero-badge {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 30px;
+    color: white;
+    background: rgba(255,255,255,0.12);
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 22px;
+}
+
+.hero-section h1 {
+    color: white;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    line-height: 1.2;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.hero-section h1 span {
+    color: #F0BD38;
+}
+
+.hero-tagline {
+    color: white;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.hero-description {
+    color: rgba(255,255,255,0.85);
+    font-size: 1rem;
+    max-width: 580px;
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 28px;
+}
+
+.btn-hero {
+    background: white;
+    color: white;
+    border: 2px solid white;
+}
+
+.btn-hero:hover {
+    background: #F0BD38;
+    color: #203879;
+    border-color: #F0BD38;
+    transform: translateY(-3px);
+}
+
+.btn-hero-outline {
+    color: white;
+    border: 2px solid rgba(255,255,255,0.8);
+}
+
+.btn-hero-outline:hover {
+    background: white;
+    color: #203879;
+    transform: translateY(-3px);
+}
+
+.hero-decoration {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.hero-circle {
+    position: absolute;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 50%;
+}
+
+.hero-circle-one {
+    width: 350px;
+    height: 350px;
+    right: -70px;
+    top: -120px;
+}
+
+.hero-circle-two {
+    width: 250px;
+    height: 250px;
+    right: 90px;
+    bottom: -150px;
+}
+
+.hero-circle-three {
+    width: 120px;
+    height: 120px;
+    right: 28%;
+    top: -65px;
+}
+
+
+/* =========================================
+   12. HOMEPAGE - SECTION HEADING
+========================================= */
+
+.section-heading {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.section-label {
+    display: inline-block;
+    color: var(--green);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.section-heading h2 {
+    color: var(--primary);
+    font-size: 1.9rem;
+    margin-bottom: 8px;
+}
+
+.section-heading p {
+    color: var(--muted);
+    margin-bottom: 0;
+}
+
+.section-heading-left {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    text-align: left;
+    gap: 15px;
+}
+
+.section-link {
+    color: var(--secondary);
+    text-decoration: none;
+    font-weight: 700;
+    white-space: nowrap;
+    transition: var(--transition);
+}
+
+.section-link:hover {
+    color: var(--green);
+    transform: translateX(5px);
+}
+
+
+/* =========================================
+   13. HOMEPAGE - STATISTICS
+========================================= */
+
+.stat-card {
+    position: relative;
+    text-align: center;
+    background: white;
+    padding: 32px 20px;
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    border-bottom: 4px solid var(--secondary);
+    transition: var(--transition);
+}
+
+.stat-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-hover);
+    border-bottom-color: var(--gold);
+}
+
+.stat-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 65px;
+    height: 65px;
+    margin: 0 auto 18px;
+    border-radius: 18px;
+    background: rgba(8,108,112,0.1);
+    color: var(--secondary);
+    font-size: 1.8rem;
+    transition: var(--transition);
+}
+
+.stat-card:hover .stat-icon {
+    background: var(--gradient);
+    color: white;
+    transform: rotate(-5deg) scale(1.08);
+}
+
+.stat-card h3 {
+    font-size: 2.2rem;
+    color: var(--primary);
+    font-weight: 800;
+    margin-bottom: 5px;
+}
+
+.stat-card p {
+    color: var(--muted);
+    margin: 0;
+    font-weight: 600;
+}
+
+
+/* =========================================
+   14. HOMEPAGE - NEWS CARDS
+========================================= */
+
+.content-card {
+    background: white;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.content-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-hover);
+}
+
+.content-card-image {
+    height: 220px;
+    overflow: hidden;
+    background: #E5E7EB;
+}
+
+.content-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.content-card:hover .content-card-image img {
+    transform: scale(1.07);
+}
+
+.content-card-placeholder {
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #203879, #086C70);
+    color: white;
+    font-size: 3.5rem;
+}
+
+.content-card-body {
+    padding: 24px;
+}
+
+.content-date {
+    display: inline-block;
+    color: var(--green);
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.content-card-body h3 {
+    color: var(--primary);
+    font-size: 1.15rem;
+    line-height: 1.5;
+    margin-bottom: 12px;
+}
+
+.content-card-body p {
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+
+.content-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--secondary);
+    font-weight: 700;
+    text-decoration: none;
+    margin-top: 8px;
+    transition: var(--transition);
+}
+
+.content-link:hover {
+    color: var(--green);
+    gap: 13px;
+}
+
+
+/* =========================================
+   15. HOMEPAGE - AGENDA
+========================================= */
+
+.agenda-card {
+    display: flex;
+    gap: 18px;
+    padding: 25px;
+    background: white;
+    border-radius: 18px;
+    border-left: 4px solid var(--secondary);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.agenda-card:hover {
+    transform: translateY(-6px);
+    border-left-color: var(--gold);
+    box-shadow: var(--shadow-hover);
+}
+
+.agenda-icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: rgba(8,108,112,0.1);
+    color: var(--secondary);
+    font-size: 1.5rem;
+}
+
+.agenda-label {
+    color: var(--green);
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.agenda-content h3 {
+    font-size: 1.1rem;
+    margin: 8px 0 15px;
+    color: var(--primary);
+}
+
+.agenda-information p {
+    color: var(--muted);
+    font-size: 0.88rem;
+    margin-bottom: 8px;
+}
+
+.agenda-information i {
+    color: var(--secondary);
+    margin-right: 5px;
+}
+
+
+/* =========================================
+   16. HOMEPAGE - EMPTY STATE
+========================================= */
+
+.empty-state {
+    text-align: center;
+    background: white;
+    border: 1px dashed #CBD5E1;
+    border-radius: 18px;
+    padding: 45px 20px;
+}
+
+.empty-state > i {
+    display: block;
+    font-size: 2.8rem;
+    color: var(--secondary);
+    margin-bottom: 15px;
+}
+
+.empty-state h3 {
+    font-size: 1.2rem;
+}
+
+.empty-state p {
+    color: var(--muted);
+    margin-bottom: 0;
+}
+
+
+/* =========================================
+   17. HOMEPAGE - RESPONSIVE
+========================================= */
+
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 45px 28px;
+        min-height: auto;
+    }
+
+    .hero-section h1 {
+        font-size: 2.2rem;
+    }
+
+    .hero-tagline {
+        font-size: 1.1rem;
+    }
+
+    .section-heading-left {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .section-heading h2 {
+        font-size: 1.6rem;
+    }
+
+    .agenda-card {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-section {
+        padding: 35px 22px;
+        border-radius: 16px;
+    }
+
+    .hero-section h1 {
+        font-size: 1.9rem;
+    }
+
+    .hero-actions .btn {
+        width: 100%;
+    }
+
+    .agenda-card {
+        gap: 12px;
+    }
+
+    .agenda-icon {
+        width: 43px;
+        height: 43px;
+        font-size: 1.2rem;
+    }
+}
+
+
+/* =========================================
+   18. HOMEPAGE - ANIMATION
+========================================= */
+
+@keyframes heroFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================================
+   HALAMAN PROFIL - DESAIN SEDERHANA
+========================================= */
+
+.profile-header {
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+.profile-header h1 {
+    color: var(--primary);
+}
+
+.profile-header p {
+    line-height: 1.8;
+}
+
+.profile-image-wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.profile-main-image {
+    max-width: 100%;
+    height: auto;
+    max-height: 450px;
+    object-fit: contain;
+    border-radius: 12px;
+}
+
+.profile-content-section {
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.profile-content-section h2,
+.profile-value h2 {
+    color: var(--primary);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--secondary);
+}
+
+.profile-content-section div,
+.profile-value div {
+    color: var(--text);
+    line-height: 1.9;
+}
+
+.profile-content-section p:last-child,
+.profile-value p:last-child {
+    margin-bottom: 0;
+}
+
+.profile-value {
+    height: 100%;
+    padding: 5px 20px 5px 0;
+}
+
+.profile-value h2 i,
+.profile-address h2 i {
+    color: var(--secondary);
+    margin-right: 8px;
+}
+
+.profile-address {
+    padding-top: 25px;
+    border-top: 1px solid #e5e7eb;
+}
+
+@media (max-width: 576px) {
+    .profile-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .profile-content-section h2,
+    .profile-value h2 {
+        font-size: 1.3rem;
+    }
+
+    .profile-main-image {
+        max-height: 300px;
+    }
+
+    .profile-value {
+        padding-right: 0;
+    }
+}
+
+/* =========================================
+   STRUKTUR POHON PIMPINAN
+========================================= */
+
+.organization-chart {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.org-level {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+}
+
+.org-person {
+    width: 100%;
+    max-width: 320px;
+    padding: 22px 18px;
+    text-align: center;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+}
+
+.org-person img {
+    width: 95px;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 12px;
+}
+
+.org-person h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 7px;
+}
+
+.org-person span {
+    display: block;
+    color: var(--secondary);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.org-person small {
+    display: block;
+    color: var(--muted);
+    margin-top: 6px;
+}
+
+.org-chairman {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+}
+
+.org-chairman h3,
+.org-chairman span,
+.org-chairman small {
+    color: white;
+}
+
+.org-chairman span {
+    color: #d7e6ff;
+}
+
+.org-vice {
+    border-top: 4px solid var(--secondary);
+}
+
+.org-connector {
+    width: 2px;
+    height: 35px;
+    background: #b7c5d5;
+    margin: 0 auto;
+}
+
+.org-branches {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 35px;
+    position: relative;
+}
+
+.org-branch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding-top: 20px;
+    border-top: 2px solid #b7c5d5;
+}
+
+.org-branch .org-person {
+    border-top: 3px solid var(--secondary);
+}
+
+@media (max-width: 576px) {
+    .org-branches {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .org-person {
+        max-width: 100%;
+    }
+}
+
+/* =========================================
+   HALAMAN RANTING MUHAMMADIYAH
+========================================= */
+
+.ranting-card {
+    text-align: center;
+    padding: 28px 22px;
+}
+
+.ranting-name {
+    color: var(--primary);
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 15px 0;
+}
+
+.ranting-info {
+    color: var(--muted);
+    font-size: 0.92rem;
+    line-height: 1.7;
+    margin-bottom: 8px;
+}
+
+.ranting-info i {
+    color: var(--secondary);
+    margin-right: 6px;
+}
+
+@media (max-width: 576px) {
+    .ranting-card {
+        padding: 24px 18px;
+    }
+}
+
+/* =========================================
+   HALAMAN AMAL USAHA
+========================================= */
+
+.amal-usaha-page h1 {
+    color: var(--primary);
+}
+
+.amal-category-title {
+    color: var(--secondary);
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgba(8, 108, 112, 0.2);
+}
+
+.amal-card {
+    background: var(--white);
+    border: 1px solid #e5eaf0 !important;
+}
+
+.amal-card .card-body h5 {
+    color: var(--primary);
+}
+
+.amal-card .card-body p {
+    color: var(--text);
+    line-height: 1.8;
+}
+
+.amal-card .card-body small {
+    color: var(--muted);
+}
+
+/* =========================================
+   HALAMAN DAFTAR BERITA
+========================================= */
+
+.content-card-title {
+    color: var(--primary);
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.5;
+    margin: 12px 0;
+}
+
+.content-card-description {
+    color: var(--text);
+    font-size: 0.93rem;
+    line-height: 1.7;
+}
+
+.content-card .content-card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+    color: var(--secondary);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.content-card .content-card-link:hover {
+    color: var(--primary);
+}
+
+.content-card .content-card-link i {
+    transition: transform 0.2s ease;
+}
+
+.content-card .content-card-link:hover i {
+    transform: translateX(4px);
+}
+
+.pagination .page-link {
+    color: var(--primary);
+    border-color: #e5eaf0;
+}
+
+.pagination .page-item.active .page-link {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+}
+
+.pagination .page-item.disabled .page-link {
+    color: var(--muted);
+}
+
+@media (max-width: 576px) {
+    .content-card-title {
+        font-size: 1.05rem;
+    }
+}
+
+/* =========================================
+   HALAMAN AGENDA KEGIATAN
+========================================= */
+
+.agenda-page h2 {
+    color: var(--primary);
+}
+
+.agenda-page section > h4 {
+    color: var(--secondary);
+    font-size: 1.25rem;
+    font-weight: 700;
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgba(8, 108, 112, 0.2);
+}
+
+.agenda-page .card {
+    background: var(--white);
+    border: 1px solid #e5eaf0;
+    border-left: 4px solid var(--secondary);
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(32, 56, 121, 0.05);
+}
+
+.agenda-page .card-body {
+    padding: 22px;
+}
+
+.agenda-page .card h5 {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.agenda-page .card p {
+    color: var(--text);
+    line-height: 1.7;
+}
+
+.agenda-page .card p.text-muted {
+    color: var(--muted) !important;
+}
+
+.agenda-page .card strong {
+    color: var(--secondary);
+}
+
+.agenda-page section > p.text-muted {
+    color: var(--muted) !important;
+}
+
+@media (max-width: 576px) {
+    .agenda-page .card-body {
+        padding: 18px;
+    }
+
+    .agenda-page section > h4 {
+        font-size: 1.15rem;
+    }
+}
+
+/* =========================================
+   HALAMAN UNDUHAN DOKUMEN
+========================================= */
+
+.unduhan-page h1 {
+    color: var(--primary);
+}
+
+.document-card {
+    background: var(--white);
+    border: 1px solid #e5eaf0 !important;
+    border-left: 4px solid var(--secondary) !important;
+    border-radius: 12px;
+}
+
+.document-card .card-body {
+    padding: 22px;
+    gap: 20px;
+}
+
+.document-card h5 {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.document-card p,
+.document-card small {
+    color: var(--muted) !important;
+    line-height: 1.7;
+}
+
+.document-download-btn {
+    flex-shrink: 0;
+    background: var(--primary);
+    color: white;
+    border: 1px solid var(--primary);
+    border-radius: 7px;
+    padding: 8px 18px;
+    font-weight: 600;
+    transition: background 0.2s ease;
+}
+
+.document-download-btn:hover {
+    background: var(--secondary);
+    border-color: var(--secondary);
+    color: white;
+}
+
+@media (max-width: 576px) {
+    .document-card .card-body {
+        align-items: flex-start !important;
+        flex-direction: column;
+    }
+}
+
+/* =========================================
+   HALAMAN HUBUNGI KAMI
+========================================= */
+
+.contact-page h1 {
+    color: var(--primary);
+}
+
+.contact-info-card,
+.contact-form-card {
+    background: var(--white);
+    border: 1px solid #e5eaf0 !important;
+    border-radius: 14px;
+}
+
+.contact-info-card {
+    border-top: 4px solid var(--secondary) !important;
+}
+
+.contact-form-card {
+    border-top: 4px solid var(--primary) !important;
+}
+
+.contact-page h4 {
+    color: var(--primary);
+}
+
+.contact-page p {
+    color: var(--text);
+    line-height: 1.8;
+}
+
+.contact-page p.text-muted {
+    color: var(--muted) !important;
+}
+
+.contact-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(8, 108, 112, 0.1);
+    color: var(--secondary);
+    border-radius: 12px;
+    font-size: 23px;
+}
+
+.contact-divider {
+    height: 1px;
+    background: #e5eaf0;
+    margin: 22px 0;
+}
+
+.contact-page .form-control,
+.contact-page .form-select {
+    border: 1px solid #dce2e9;
+    border-radius: 8px;
+    padding: 11px 13px;
+}
+
+.contact-page .form-control:focus,
+.contact-page .form-select:focus {
+    border-color: var(--secondary);
+    box-shadow: 0 0 0 0.2rem rgba(8, 108, 112, 0.12);
+}
+
+.contact-submit-btn {
+    background: var(--primary);
+    color: white;
+    border: 1px solid var(--primary);
+    border-radius: 8px;
+    padding: 10px 22px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.contact-submit-btn:hover {
+    background: var(--secondary);
+    border-color: var(--secondary);
+    color: white;
+}
+
+@media (max-width: 576px) {
+    .contact-page .card-body {
+        padding: 22px !important;
+    }
+
+    .contact-submit-btn {
+        width: 100%;
+    }
+}
+
+/* Footer */
+footer .row {
+    justify-content: center;
+}
+
+footer .col-md-4 {
+    padding-left: 35px;
+}

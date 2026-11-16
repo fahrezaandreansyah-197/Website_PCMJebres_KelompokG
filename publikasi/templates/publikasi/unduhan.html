@@ -1,0 +1,48 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="container py-5 unduhan-page">
+
+    <div class="text-center mb-5">
+        <h1 class="fw-bold">Unduhan Dokumen</h1>
+        <p class="text-muted">
+            Kumpulan dokumen dan berkas PCM Jebres.
+        </p>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-9">
+
+            {% for item in daftar_dokumen %}
+                <div class="card shadow-sm mb-3 document-card">
+                    <div class="card-body d-flex justify-content-between align-items-center">
+
+                        <div>
+                            <h5 class="fw-bold mb-1">{{ item.judul }}</h5>
+                            <p class="text-muted mb-1">
+                                {{ item.keterangan }}
+                            </p>
+                            <small class="text-muted">
+                                Diunggah {{ item.tanggal_unggah|date:"d F Y" }}
+                            </small>
+                        </div>
+
+                        <a href="{{ item.file.url }}"
+                           class="btn btn-sm document-download-btn"
+                           target="_blank">
+                            Unduh
+                        </a>
+
+                    </div>
+                </div>
+            {% empty %}
+                <p class="text-center text-muted">
+                    Belum ada dokumen yang tersedia.
+                </p>
+            {% endfor %}
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}

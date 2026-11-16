@@ -1,0 +1,116 @@
+
+{% extends 'core/base.html' %}
+
+{% block title %}Berita | PCM Jebres{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <!-- Header -->
+    <div class="text-center mb-5">
+        <span class="section-label">Informasi dan Kegiatan</span>
+        <h1 class="fw-bold mt-3" style="color: var(--primary);">
+            Berita PCM Jebres
+        </h1>
+        <p class="text-muted">
+            Informasi dan berita kegiatan Muhammadiyah Jebres.
+        </p>
+    </div>
+
+    <!-- Daftar Berita -->
+    <div class="row g-4">
+
+        {% for item in halaman %}
+            <div class="col-md-6 col-lg-4">
+
+                <article class="content-card h-100">
+
+                    {% if item.gambar_sampul %}
+                        <div class="content-card-image">
+                            <img src="{{ item.gambar_sampul.url }}"
+                                 alt="{{ item.judul }}">
+                        </div>
+                    {% else %}
+                        <div class="content-card-placeholder">
+                            <i class="bi bi-newspaper"></i>
+                        </div>
+                    {% endif %}
+
+                    <div class="content-card-body">
+
+                        <div class="content-card-date">
+                            <i class="bi bi-calendar3"></i>
+                            {{ item.tanggal_terbit|date:"d F Y" }}
+                        </div>
+
+                        <h3 class="content-card-title">
+                            {{ item.judul }}
+                        </h3>
+
+                        <p class="content-card-description">
+                            {{ item.ringkasan|truncatewords:20 }}
+                        </p>
+
+                        <a href="{% url 'publikasi:detail_berita' item.slug %}"
+                           class="content-card-link">
+                            Baca Selengkapnya
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        {% empty %}
+            <div class="col-12">
+                <div class="empty-state">
+                    <i class="bi bi-newspaper"></i>
+                    <h3>Belum Ada Berita</h3>
+                    <p>Belum ada berita yang diterbitkan saat ini.</p>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+
+    <!-- Pagination -->
+    {% if halaman.paginator.num_pages > 1 %}
+        <nav class="mt-5" aria-label="Navigasi halaman berita">
+            <ul class="pagination justify-content-center">
+
+                {% if halaman.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link"
+                           href="?page={{ halaman.previous_page_number }}">
+                            <i class="bi bi-chevron-left"></i>
+                            Sebelumnya
+                        </a>
+                    </li>
+                {% endif %}
+
+                <li class="page-item disabled">
+                    <span class="page-link">
+                        {{ halaman.number }} / {{ halaman.paginator.num_pages }}
+                    </span>
+                </li>
+
+                {% if halaman.has_next %}
+                    <li class="page-item">
+                        <a class="page-link"
+                           href="?page={{ halaman.next_page_number }}">
+                            Berikutnya
+                            <i class="bi bi-chevron-right"></i>
+                        </a>
+                    </li>
+                {% endif %}
+
+            </ul>
+        </nav>
+    {% endif %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,221 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}PCM Jebres{% endblock %}</title>
+    {% if profil_global and profil_global.gambar_utama %}
+        <link rel="icon"
+          type="image/png"
+          href="{{ profil_global.gambar_utama.url }}">
+    {% endif %}
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+        }
+
+        .main-content {
+            min-height: 70vh;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <div class="container">
+            <a class="navbar-brand fw-bold d-flex align-items-center gap-2"
+            href="{% url 'core:home' %}">
+
+                {% if profil_global and profil_global.gambar_utama %}
+                    <img src="{{ profil_global.gambar_utama.url }}"
+                        alt="Logo Muhammadiyah"
+                        style="width: 42px; height: 42px; object-fit: contain; background: white; border-radius: 50%; padding: 3px;">
+                {% endif %}
+
+                <span>PCM Jebres<span>
+            </a>
+
+
+            <button class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarMenu">
+                <ul class="navbar-nav ms-auto">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'core:home' %}">
+                            Beranda
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'core:profil' %}">
+                            Profil
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'core:pimpinan' %}">
+                            Pimpinan
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'core:ranting' %}">
+                            Ranting
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'core:amal_usaha' %}">
+                            Amal Usaha
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'publikasi:daftar_berita' %}">
+                            Berita
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'publikasi:daftar_agenda' %}">
+                            Agenda
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'publikasi:daftar_dokumen' %}">
+                            Unduhan
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'kontak:kontak' %}">
+                            Kontak
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+
+
+    <!-- Konten halaman -->
+    <main class="main-content container py-4">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white pt-5 pb-3">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+
+                <!-- PCM Jebres di Kiri -->
+                <div class="col-md-6">
+                    <h5 class="fw-bold">PCM Jebres</h5>
+                    <p class="text-white-50">Pimpinan Cabang Muhammadiyah Jebres</p>
+
+                    <p class="text-white-50">
+                        {% if profil_global %}
+                            {{ profil_global.alamat }}
+                        {% else %}
+                            Jln. Tentara Pelajar No. 1, Kandang Sapi,
+                            Jebres, Surakarta
+                        {% endif %}
+                    </p>
+
+                    <p class="text-white-50">
+                        <i class="bi bi-telephone me-2"></i>
+                        <a href="tel:+6281933747510" class="text-white-50 text-decoration-none">
+                            081933747510
+                        </a>
+                    </p>
+
+                    <h6 class="fw-bold">Lokasi Sekretariat</h6>
+                    <iframe
+                        src="https://www.google.com/maps?q=-7.554767,110.839599&output=embed"
+                        width="100%" height="200"
+                        style="border:0; border-radius:10px;"
+                        loading="lazy" allowfullscreen>
+                    </iframe>
+                </div>
+
+                <!-- Tautan dan Informasi di Kanan -->
+                <div class="col-md-5 offset-md-1 d-flex flex-column justify-content-center">
+                    <div class="mb-4">
+                        <h5 class="fw-bold">Tautan Terkait</h5>
+                        <ul class="list-unstyled">
+                            {% for tautan in tautan_global %}
+                                <li class="mb-2">
+                                    <a href="{{ tautan.url }}" target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="text-white-50 text-decoration-none">
+                                        {{ tautan.nama }}
+                                    </a>
+                                </li>
+                            {% empty %}
+                                <li class="text-white-50">Belum ada tautan.</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h5 class="fw-bold">Informasi</h5>
+                        <p class="text-white-50 small">
+                            Website ini dibuat untuk memperkenalkan profil,
+                            kegiatan, dan informasi organisasi PCM Jebres.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="border-secondary">
+
+            <div class="text-center text-white-50 small">
+                <p>
+                    Website ini dibuat untuk tugas kuliah
+                    Pemrograman Web berbasis Framework,
+                    bukan website resmi PCM Jebres.
+                </p>
+                <p>
+                    Logo Muhammadiyah: K. H. Siradj Dahlan,
+                    vektor oleh Hibensis, via Wikimedia Commons,
+                    lisensi CC BY-SA 4.0.
+                </p>
+                <p class="mb-0">
+                    &copy; 2026 Pimpinan Cabang Muhammadiyah Jebres
+                </p>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

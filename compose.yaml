@@ -1,0 +1,44 @@
+
+services:
+  db:
+    image: postgres:17
+    container_name: pcm_jebres_db_v2
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: pcm_jebres
+      POSTGRES_USER: pcm_user
+      POSTGRES_PASSWORD: pcm_password_local
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pcm_user -d pcm_jebres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  
+  web:
+    build: .
+    container_name: pcm_jebres_web_v2
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: postgres://pcm_user:pcm_password_local@db:5432/pcm_jebres
+      DEBUG: "False"
+      ALLOWED_HOSTS: localhost,127.0.0.1
+      CSRF_TRUSTED_ORIGINS: http://localhost:8000,http://127.0.0.1:8000
+    ports:
+      - "8000:8000"
+    volumes:
+      - media_data:/app/media
+    depends_on:
+      db:
+        condition: service_healthy
+    command: >
+      sh -c ".venv/bin/python manage.py migrate &&
+             .venv/bin/gunicorn config.wsgi:application --bind 0.0.0.0:8000"
+
+volumes:
+  postgres_data:
+  media_data:
