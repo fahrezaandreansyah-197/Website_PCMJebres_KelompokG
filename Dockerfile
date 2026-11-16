@@ -35,4 +35,4 @@ USER appuser
 EXPOSE 8000
 
 # Menjalankan Django menggunakan Gunicorn
-CMD ["sh", "-c", ".venv/bin/python manage.py migrate --noinput && .venv/bin/python manage.py seed_pcm && .venv/bin/python manage.py init_admin && .venv/bin/python manage.py gunicorn config.wsgi:application --bind 0.0.0.0:8000"]
+CMD ["sh", "-c", ".venv/bin/python manage.py migrate --noinput && .venv/bin/python manage.py seed_pcm && .venv/bin/python manage.py init_admin && .venv/bin/gunicorn config.wsgi:application --bind 0.0.0.0:8000"]
