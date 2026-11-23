@@ -2,13 +2,47 @@
 #    uv export --format requirements-txt --no-hashes -o requirements.txt
 asgiref==3.13.0
     # via django
-django==6.1.2
+certifi==2026.11.20
+    # via
+    #   cloudinary
+    #   requests
+charset-normalizer==3.5.2
+    # via requests
+cloudinary==1.47.0
+    # via django-cloudinary-storage
+dj-database-url==3.1.2
     # via website-pcm-kelompok-g
+django==6.1.2
+    # via
+    #   dj-database-url
+    #   website-pcm-kelompok-g
+django-cloudinary-storage==0.3.0
+    # via website-pcm-kelompok-g
+gunicorn==27.0.1
+    # via website-pcm-kelompok-g
+idna==3.20
+    # via requests
 pillow==13.0.0
     # via website-pcm-kelompok-g
+psycopg==3.3.9
+    # via website-pcm-kelompok-g
+psycopg-binary==3.3.9 ; implementation_name != 'pypy'
+    # via psycopg
 python-dotenv==1.2.4
     # via website-pcm-kelompok-g
+requests==2.34.2
+    # via django-cloudinary-storage
+six==1.17.0
+    # via cloudinary
 sqlparse==0.6.1
     # via django
 tzdata==2026.6 ; sys_platform == 'win32'
-    # via django
+    # via
+    #   django
+    #   psycopg
+urllib3==2.8.0
+    # via
+    #   cloudinary
+    #   requests
+whitenoise==6.12.0
+    # via website-pcm-kelompok-g
