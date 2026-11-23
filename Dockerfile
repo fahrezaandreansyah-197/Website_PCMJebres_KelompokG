@@ -1,3 +1,4 @@
+
 # Menggunakan Python 3.14
 FROM python:3.14-slim
 
@@ -20,19 +21,16 @@ RUN uv sync --frozen --no-dev --no-install-project
 # Menyalin seluruh kode proyek
 COPY . .
 
-# Mengumpulkan file static Django
-RUN SECRET_KEY=build-only DEBUG=False ALLOWED_HOSTS=localhost \
-    .venv/bin/python manage.py collectstatic --noinput
-
-# Membuat user non-root
+# Membuat user non-root dan direktori penyimpanan
 RUN useradd --create-home appuser \
-    && mkdir -p /app/media \
+    && mkdir -p /app/media /app/staticfiles /app/manifest \
     && chown -R appuser:appuser /app
 
+# Menggunakan user non-root
 USER appuser
 
 # Port aplikasi
 EXPOSE 8000
 
-# Menjalankan Django menggunakan Gunicorn
-CMD ["sh", "-c", ".venv/bin/python manage.py migrate --noinput && .venv/bin/python manage.py seed_pcm && .venv/bin/python manage.py init_admin && .venv/bin/gunicorn config.wsgi:application --bind 0.0.0.0:8000"]
+# Mengumpulkan static files dan menjalankan Django
+CMD ["sh", "-c", ".venv/bin/python manage.py collectstatic --noinput && .venv/bin/python manage.py migrate --noinput && .venv/bin/python manage.py seed_pcm && .venv/bin/python manage.py init_admin && .venv/bin/gunicorn config.wsgi:application --bind 0.0.0.0:${PORT:-8000}"]
